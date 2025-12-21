@@ -669,7 +669,7 @@ export default function LandingPage() {
               },
               {
                 q: "When will ROKon launch?",
-                a: "We're targeting Q1 2025 for public launch. Waitlist members get early beta access and founding member pricing locked in for life."
+                a: "We're targeting Q1 2026 for public launch. Waitlist members get early beta access and founding member pricing locked in for life."
               },
               {
                 q: "Is the military theme mandatory?",
