@@ -47,21 +47,46 @@ function ROKonLogo({ className = '' }: { className?: string }) {
 // Radar HUD Component
 function RadarHUD() {
   return (
-    <div className="absolute right-10 top-1/2 -translate-y-1/2 w-48 h-48 opacity-20 hidden lg:block">
+    <div className="w-64 h-64 xl:w-80 xl:h-80 opacity-60">
       <svg viewBox="0 0 200 200" className="w-full h-full">
+        {/* Outer glow ring */}
+        <circle cx="100" cy="100" r="95" fill="none" stroke="#00d4ff" strokeWidth="0.3" opacity="0.5" />
         {/* Radar circles */}
-        <circle cx="100" cy="100" r="90" fill="none" stroke="#00d4ff" strokeWidth="0.5" />
-        <circle cx="100" cy="100" r="60" fill="none" stroke="#00d4ff" strokeWidth="0.5" />
-        <circle cx="100" cy="100" r="30" fill="none" stroke="#00d4ff" strokeWidth="0.5" />
+        <circle cx="100" cy="100" r="90" fill="none" stroke="#00d4ff" strokeWidth="1" />
+        <circle cx="100" cy="100" r="60" fill="none" stroke="#00d4ff" strokeWidth="0.8" />
+        <circle cx="100" cy="100" r="30" fill="none" stroke="#00d4ff" strokeWidth="0.6" />
         {/* Cross hairs */}
-        <line x1="100" y1="10" x2="100" y2="190" stroke="#00d4ff" strokeWidth="0.5" />
-        <line x1="10" y1="100" x2="190" y2="100" stroke="#00d4ff" strokeWidth="0.5" />
+        <line x1="100" y1="5" x2="100" y2="195" stroke="#00d4ff" strokeWidth="0.5" />
+        <line x1="5" y1="100" x2="195" y2="100" stroke="#00d4ff" strokeWidth="0.5" />
+        {/* Diagonal lines */}
+        <line x1="30" y1="30" x2="170" y2="170" stroke="#00d4ff" strokeWidth="0.3" opacity="0.5" />
+        <line x1="170" y1="30" x2="30" y2="170" stroke="#00d4ff" strokeWidth="0.3" opacity="0.5" />
+        {/* Sweep gradient */}
+        <defs>
+          <linearGradient id="sweepGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#00d4ff" stopOpacity="0" />
+            <stop offset="100%" stopColor="#00d4ff" stopOpacity="0.6" />
+          </linearGradient>
+        </defs>
+        {/* Sweep cone */}
+        <path
+          d="M100,100 L100,10 A90,90 0 0,1 163,50 Z"
+          fill="url(#sweepGradient)"
+          className="radar-sweep"
+          style={{ transformOrigin: '100px 100px' }}
+        />
         {/* Sweep line */}
-        <line x1="100" y1="100" x2="100" y2="10" stroke="#00d4ff" strokeWidth="2" className="radar-sweep origin-center" style={{ transformOrigin: '100px 100px' }} />
-        {/* Blips */}
-        <circle cx="130" cy="70" r="3" fill="#00ff88" className="pulse-glow" />
-        <circle cx="60" cy="120" r="3" fill="#ff6b35" className="pulse-glow" />
-        <circle cx="150" cy="130" r="2" fill="#00d4ff" className="pulse-glow" />
+        <line x1="100" y1="100" x2="100" y2="10" stroke="#00d4ff" strokeWidth="2" className="radar-sweep" style={{ transformOrigin: '100px 100px' }} />
+        {/* Center dot */}
+        <circle cx="100" cy="100" r="3" fill="#00d4ff" />
+        {/* Blips - threats detected */}
+        <circle cx="140" cy="60" r="4" fill="#ff3366" className="pulse-glow" />
+        <circle cx="55" cy="130" r="4" fill="#ff6b35" className="pulse-glow" />
+        <circle cx="160" cy="120" r="3" fill="#00ff88" className="pulse-glow" />
+        <circle cx="75" cy="70" r="3" fill="#ffd700" className="pulse-glow" />
+        {/* Blip rings */}
+        <circle cx="140" cy="60" r="8" fill="none" stroke="#ff3366" strokeWidth="1" opacity="0.5" className="pulse-glow" />
+        <circle cx="55" cy="130" r="8" fill="none" stroke="#ff6b35" strokeWidth="1" opacity="0.5" className="pulse-glow" />
       </svg>
     </div>
   );
@@ -245,10 +270,13 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center pt-20">
-        <RadarHUD />
+      <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        {/* Radar positioned in hero, top right area */}
+        <div className="absolute top-32 right-10 xl:right-32 hidden lg:block pointer-events-none z-0">
+          <RadarHUD />
+        </div>
 
-        <div className="max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center relative z-10">
           {/* Left: Copy */}
           <div className="space-y-8">
             {/* Status Badge */}
@@ -260,7 +288,7 @@ export default function LandingPage() {
             {/* Main Headline */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight">
               <span className="text-white">Traditional SEO is</span><br />
-              <span className="text-[#ff3366] line-through opacity-60">Dead</span>{' '}
+              <span className="text-[#ff3366] opacity-60" style={{ textDecoration: 'line-through', textDecorationColor: 'black' }}>Dead</span>{' '}
               <span className="text-white">Incomplete.</span><br />
               <span className="gradient-text-rok">Total Search Domination</span><br />
               <span className="text-white">Starts Here.</span>
@@ -302,7 +330,8 @@ export default function LandingPage() {
 
           {/* Right: Visual/Terminal */}
           <div className="relative">
-            <div className="rounded-lg border border-gray-700 bg-[#0a0f1a] p-6 font-mono text-sm">
+
+            <div className="rounded-lg border border-gray-700 bg-[#0a0f1a]/95 backdrop-blur-sm p-6 font-mono text-sm relative z-10">
               {/* Terminal header */}
               <div className="flex items-center gap-2 mb-4 pb-4 border-b border-gray-800">
                 <div className="w-3 h-3 rounded-full bg-[#ff3366]" />
