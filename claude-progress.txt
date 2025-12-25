@@ -1,0 +1,60 @@
+# Claude Progress Log - rokon-landing
+
+ROKon Waitlist Landing Page
+Repository: github.com/klatt42/rokon-landing
+
+---
+
+[2025-12-23 19:45] Session Summary
+- Completed: landing-page-scaffold, hero-section, waitlist-form, rok-phases, social-proof, faq-section, radar-hud
+- In Progress: None (frontend complete)
+- Blockers: None
+- Decisions:
+  - Separate repo from serp-master for clean deployment
+  - Dark tactical theme with R-O-K color coding (cyan/orange/green)
+  - Radar HUD positioned prominently in hero section
+  - 7 CTAs spread throughout page for conversion
+  - Q1 2026 launch target
+- Next Session: Connect waitlist form to Supabase, deploy to Netlify, add analytics
+
+---
+
+## Quick Restart
+
+```bash
+cd /home/klatt42/projects/rokon-landing
+npm run dev -- -p 3012
+# Visit: http://localhost:3012
+```
+
+## Project Status
+
+| Component | Status | Notes |
+|-----------|--------|-------|
+| Next.js scaffold | Done | v16.1.0 with Turbopack |
+| Hero section | Done | Terminal mockup + radar HUD |
+| Waitlist form | Done | Frontend only, needs backend |
+| R-O-K phases | Done | 3 phase cards with colors |
+| AI platforms | Done | 6 platforms with codenames |
+| Testimonials | Done | 3 placeholder testimonials |
+| FAQ section | Done | 5 questions |
+| SEO metadata | Done | OG + Twitter cards |
+| Supabase backend | Todo | For email collection |
+| Netlify deploy | Todo | Production hosting |
+| Analytics | Todo | Plausible or GA4 |
+
+## Key Files
+
+- `src/app/page.tsx` - Main landing page (740 lines)
+- `src/app/globals.css` - Tactical theme CSS
+- `src/app/layout.tsx` - SEO metadata
+
+## Color Palette
+
+| Phase | Color | Hex |
+|-------|-------|-----|
+| REVEAL | Cyan | #00d4ff |
+| OPTIMIZE | Orange | #ff6b35 |
+| KONQUER | Green | #00ff88 |
+| Threats | Red | #ff3366 |
+| Urgency | Gold | #ffd700 |
