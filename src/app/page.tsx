@@ -288,7 +288,14 @@ export default function LandingPage() {
             {/* Main Headline */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight">
               <span className="text-white">Traditional SEO is</span><br />
-              <span className="text-[#ff3366] opacity-60" style={{ textDecoration: 'line-through', textDecorationColor: 'black' }}>Dead</span>{' '}
+              <span className="relative inline-block">
+                <span className="text-[#ff3366] opacity-40">Dead</span>
+                {/* Dramatic X strikethrough */}
+                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                  <line x1="0" y1="0" x2="100" y2="100" stroke="#ff3366" strokeWidth="8" strokeLinecap="round" />
+                  <line x1="100" y1="0" x2="0" y2="100" stroke="#ff3366" strokeWidth="8" strokeLinecap="round" />
+                </svg>
+              </span>{' '}
               <span className="text-white">Incomplete.</span><br />
               <span className="gradient-text-rok">Total Search Domination</span><br />
               <span className="text-white">Starts Here.</span>
